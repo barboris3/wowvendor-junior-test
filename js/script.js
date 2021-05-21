@@ -24,7 +24,7 @@
 	}
 
 	function startMovingDonut() {
-		if(isDonutAtTheEnd()) {
+		if(isDonutAtTheBegin()) {
 			clearInterval(jumpIId);
 			clearInterval(winIId);
 			clearInterval(beginIId);
