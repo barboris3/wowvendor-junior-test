@@ -1,16 +1,16 @@
 'use strict';
 (() => {
-	document.addEventListener("DOMContentLoaded", initDonutMoving);
+	document.addEventListener("DOMContentLoaded", () => setInterval(startMovingDonut, 500));
 
 	let jumpIId = null;
 	let winIId = null;
-	let beginIId = null;
 	let isWin = null;
 	let jumpPosition;
 	let rockSize;
 	let rockPosition;
 	
 	function initDonutMoving() {
+		
 		/*if win variable setted - push results to db*/
 		if(isWin !== null) pushInDB();
 		
@@ -19,17 +19,14 @@
 		/*checking during donut moving, is the rock on the way or is it at the end of the map*/
 		jumpIId = setInterval(jumpIfRockOnTheWay, 10);
 		winIId = setInterval(setWinIfDonutInTheEnd, 10);
-		/*reset intervals id and init donut moving if it is at the begin of the path*/
-		beginIId = setInterval(startMovingDonut, 10);
 	}
 
 	function startMovingDonut() {
-		if(isDonutAtTheBegin()) {
-			clearInterval(jumpIId);
-			clearInterval(winIId);
-			clearInterval(beginIId);
-			initDonutMoving();
+		if(isDonutAtTheBegin()) {			
 			window.character.run();
+			clearInterval(jumpIId);
+			clearInterval(winIId);			
+			initDonutMoving();
 		}
 	}
 	
